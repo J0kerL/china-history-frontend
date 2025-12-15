@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Clock, Users, Crown } from "lucide-react";
+import { ArrowRight, Map, Users, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
 
@@ -60,10 +60,10 @@ export const HeroSection = () => {
             </div>
             <div className="text-center">
               <div className="flex items-center justify-center gap-2 text-primary-foreground/80 mb-1">
-                <Clock className="h-4 w-4" />
+                <Map className="h-4 w-4" />
               </div>
-              <p className="text-2xl md:text-3xl font-bold text-primary-foreground">5000</p>
-              <p className="text-sm text-primary-foreground/60">年历史</p>
+              <p className="text-2xl md:text-3xl font-bold text-primary-foreground">150+</p>
+              <p className="text-sm text-primary-foreground/60">著名事件</p>
             </div>
           </div>
         </div>
