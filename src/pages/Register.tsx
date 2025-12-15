@@ -11,7 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
+import { Loader2, Eye, EyeOff } from "lucide-react";
 import * as authService from "@/services/auth";
 
 const Register = () => {
@@ -22,6 +22,7 @@ const Register = () => {
     confirmPassword: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [showPasswords, setShowPasswords] = useState({ password: false, confirm: false });
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -52,10 +53,10 @@ const Register = () => {
       return;
     }
 
-    if (formData.password.length < 6) {
+    if (formData.password.length < 6 || formData.password.length > 12) {
       toast({
         title: "提示",
-        description: "密码长度至少为6位",
+        description: "密码长度必须在6-12位之间",
         variant: "destructive",
       });
       return;
@@ -154,33 +155,59 @@ const Register = () => {
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">
-                密码 <span className="text-destructive">*</span>
+                密码 (6-12位) <span className="text-destructive">*</span>
               </Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="请输入密码（至少6位）"
-                value={formData.password}
-                onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
-                }
-                disabled={isLoading}
-              />
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPasswords.password ? "text" : "password"}
+                  placeholder="请输入密码"
+                  value={formData.password}
+                  onChange={(e) =>
+                    setFormData({ ...formData, password: e.target.value })
+                  }
+                  disabled={isLoading}
+                  className="pr-10"
+                  minLength={6}
+                  maxLength={12}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPasswords({ ...showPasswords, password: !showPasswords.password })}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  tabIndex={-1}
+                >
+                  {showPasswords.password ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="confirmPassword">
                 确认密码 <span className="text-destructive">*</span>
               </Label>
-              <Input
-                id="confirmPassword"
-                type="password"
-                placeholder="请再次输入密码"
-                value={formData.confirmPassword}
-                onChange={(e) =>
-                  setFormData({ ...formData, confirmPassword: e.target.value })
-                }
-                disabled={isLoading}
-              />
+              <div className="relative">
+                <Input
+                  id="confirmPassword"
+                  type={showPasswords.confirm ? "text" : "password"}
+                  placeholder="请再次输入密码"
+                  value={formData.confirmPassword}
+                  onChange={(e) =>
+                    setFormData({ ...formData, confirmPassword: e.target.value })
+                  }
+                  disabled={isLoading}
+                  className="pr-10"
+                  minLength={6}
+                  maxLength={12}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPasswords({ ...showPasswords, confirm: !showPasswords.confirm })}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  tabIndex={-1}
+                >
+                  {showPasswords.confirm ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
             </div>
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? (

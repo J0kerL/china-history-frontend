@@ -77,7 +77,7 @@ export const UserMenu = () => {
         className="w-56 shadow-lg border-border/50" 
         align="end" 
         forceMount
-        sideOffset={8}
+        sideOffset={5}
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
         onCloseAutoFocus={(e) => e.preventDefault()}

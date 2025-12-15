@@ -16,7 +16,7 @@ export const Layout = ({ children }: LayoutProps) => {
             华夏历史 · 探索五千年文明
           </p>
           <p className="text-muted-foreground/60 text-xs mt-2">
-            © 2024 华夏历史知识系统
+            © 2025 华夏历史知识系统
           </p>
         </div>
       </footer>
