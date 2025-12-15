@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Clock, Users, Calendar, Map, MessageCircle } from "lucide-react";
+import { Menu, X, Home, Users, Crown, Map, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { UserMenu } from "./UserMenu";
 
 const navItems = [
-  { path: "/", label: "首页", icon: Clock },
-  { path: "/dynasties", label: "朝代", icon: Calendar },
+  { path: "/", label: "首页", icon: Home },
+  { path: "/dynasties", label: "朝代", icon: Crown },
   { path: "/figures", label: "人物", icon: Users },
   { path: "/events", label: "事件", icon: Map },
   { path: "/ai-assistant", label: "AI助手", icon: MessageCircle },
@@ -56,7 +56,7 @@ export const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button and User Menu */}
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-2 ml-auto md:hidden">
             <UserMenu />
             <Button
               variant="ghost"

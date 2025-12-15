@@ -72,7 +72,7 @@ const Profile = () => {
                   </div>
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <Calendar className="h-4 w-4" />
-                    <span>注册时间: 2024-01-01</span>
+                    <span>注册时间: {user.createdAt ? new Date(user.createdAt).toLocaleDateString('zh-CN') : '未知'}</span>
                   </div>
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <Shield className="h-4 w-4" />

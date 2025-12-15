@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { Calendar, Users, Map, MessageCircle, Clock, BookOpen } from "lucide-react";
+import { Crown, Users, Map, MessageCircle, Clock, BookOpen } from "lucide-react";
 
 const features = [
   {
-    icon: Calendar,
+    icon: Crown,
     title: "朝代浏览",
     description: "从夏商周到清朝，系统学习各朝代的历史特点",
     link: "/dynasties",

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Clock, Users, Calendar } from "lucide-react";
+import { ArrowRight, Clock, Users, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
 
@@ -46,7 +46,7 @@ export const HeroSection = () => {
           <div className="grid grid-cols-3 gap-4 max-w-md mx-auto">
             <div className="text-center">
               <div className="flex items-center justify-center gap-2 text-primary-foreground/80 mb-1">
-                <Calendar className="h-4 w-4" />
+                <Crown className="h-4 w-4" />
               </div>
               <p className="text-2xl md:text-3xl font-bold text-primary-foreground">10+</p>
               <p className="text-sm text-primary-foreground/60">主要朝代</p>

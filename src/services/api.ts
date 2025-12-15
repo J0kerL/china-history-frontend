@@ -42,6 +42,17 @@ export async function request<T = any>(
       headers,
     });
 
+    // 处理 401 未授权响应（token 过期或无效）
+    if (response.status === 401) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      // 如果不是在登录相关页面，跳转到登录页
+      if (!window.location.pathname.includes('/login')) {
+        window.location.href = '/login';
+      }
+      throw new Error('登录已过期，请重新登录');
+    }
+
     const data = await response.json();
 
     // 检查响应状态
