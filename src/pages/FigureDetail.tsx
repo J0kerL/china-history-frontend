@@ -129,7 +129,7 @@ const FigureDetail = () => {
         {/* 返回按钮 */}
         <Button variant="ghost" className="mb-6" onClick={() => navigate("/figures")}>
           <ArrowLeft className="h-4 w-4 mr-2" />
-          返回人物列表
+          返回
         </Button>
 
         {/* 人物头部信息 */}

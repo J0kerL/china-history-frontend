@@ -21,7 +21,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { User, Calendar, Shield, History, Eye, EyeOff } from "lucide-react";
+import { User, Calendar, Shield, Eye, EyeOff } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
@@ -189,10 +189,9 @@ const Profile = () => {
               </CardHeader>
               <CardContent>
                 <Tabs defaultValue="info" className="w-full">
-                  <TabsList className="grid w-full grid-cols-3">
+                  <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="info">基本信息</TabsTrigger>
                     <TabsTrigger value="security">安全设置</TabsTrigger>
-                    <TabsTrigger value="history">浏览历史</TabsTrigger>
                   </TabsList>
 
                   <TabsContent value="info" className="space-y-4 mt-4">
@@ -301,31 +300,6 @@ const Profile = () => {
                     </div>
                   </TabsContent>
 
-                  <TabsContent value="history" className="mt-4">
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-                        <History className="h-5 w-5 text-muted-foreground" />
-                        <div className="flex-1">
-                          <p className="font-medium">唐朝历史</p>
-                          <p className="text-sm text-muted-foreground">2024-12-10 14:30</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-                        <History className="h-5 w-5 text-muted-foreground" />
-                        <div className="flex-1">
-                          <p className="font-medium">李白生平</p>
-                          <p className="text-sm text-muted-foreground">2024-12-09 10:15</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-                        <History className="h-5 w-5 text-muted-foreground" />
-                        <div className="flex-1">
-                          <p className="font-medium">安史之乱</p>
-                          <p className="text-sm text-muted-foreground">2024-12-08 16:45</p>
-                        </div>
-                      </div>
-                    </div>
-                  </TabsContent>
                 </Tabs>
               </CardContent>
             </Card>

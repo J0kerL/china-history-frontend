@@ -2,7 +2,7 @@ import { Layout } from "@/components/layout/Layout";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getDynastyDetail, DynastyDetailVO, formatPeriod, generateRandomColor } from "@/services/dynasty";
-import { ChevronLeft, Crown, Users, Calendar, MapPin } from "lucide-react";
+import { ArrowLeft, Crown, Users, Calendar, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const DynastyDetail = () => {
@@ -73,10 +73,10 @@ const DynastyDetail = () => {
     <Layout>
       <div className="container mx-auto px-4 py-8">
         {/* 返回按钮 */}
-        <Link to="/dynasties" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors">
-          <ChevronLeft className="h-4 w-4" />
-          返回朝代列表
-        </Link>
+        <Button variant="ghost" className="mb-6" onClick={() => navigate("/dynasties")}>
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          返回
+        </Button>
 
         {/* 朝代头部信息 */}
         <div className="bg-card border border-border rounded-lg overflow-hidden mb-8">

@@ -6,7 +6,7 @@ import { getEventById, EventVO } from "@/services/event";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Calendar, FileText, Info } from "lucide-react";
+import { ArrowLeft, Calendar, FileText } from "lucide-react";
 
 // 格式化年份显示
 const formatYear = (year: number | null | undefined): string => {
