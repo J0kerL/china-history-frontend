@@ -48,7 +48,7 @@ export const HeroSection = () => {
               <div className="flex items-center justify-center gap-2 text-primary-foreground/80 mb-1">
                 <Crown className="h-4 w-4" />
               </div>
-              <p className="text-2xl md:text-3xl font-bold text-primary-foreground">10+</p>
+              <p className="text-2xl md:text-3xl font-bold text-primary-foreground">20+</p>
               <p className="text-sm text-primary-foreground/60">主要朝代</p>
             </div>
             <div className="text-center">

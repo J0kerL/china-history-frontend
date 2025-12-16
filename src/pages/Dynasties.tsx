@@ -1,9 +1,42 @@
 import { Layout } from "@/components/layout/Layout";
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
-import { dynasties } from "@/data/dynasties";
+import { useEffect, useState } from "react";
+import { getDynastyList, DynastyDisplay, toDynastyDisplay } from "@/services/dynasty";
 
 const Dynasties = () => {
+  const [dynasties, setDynasties] = useState<DynastyDisplay[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDynasties = async () => {
+      try {
+        const response = await getDynastyList();
+        if (response.code === 0 && response.data) {
+          const displayData = response.data.map(toDynastyDisplay);
+          setDynasties(displayData);
+        }
+      } catch (error) {
+        console.error("获取朝代列表失败:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDynasties();
+  }, []);
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-12">
+          <div className="text-center">
+            <p className="text-muted-foreground">加载中...</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
       <div className="container mx-auto px-4 py-12">
