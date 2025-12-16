@@ -93,10 +93,13 @@ export const DynastyTimeline = () => {
                   {/* 在第4个之后显示省略指示器 */}
                   {showEllipsis && index === ellipsisIndex && (
                     <div className="relative flex items-center justify-center py-8 mb-4">
-                      {/* 中心圆形背景 - 更大更明显 */}
-                      <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-primary/10 border-2 border-dashed border-primary/30 z-10 flex items-center justify-center">
-                        {/* 竖向三个点 - 更大更明显 */}
-                        <div className="flex flex-col gap-1.5">
+                      {/* 中心圆形背景 - 6个点 */}
+                      <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-20 h-20 rounded-full bg-primary/10 border-2 border-dashed border-primary/30 z-10 flex items-center justify-center">
+                        {/* 竖向六个点 */}
+                        <div className="flex flex-col gap-1">
+                          <div className="w-2 h-2 rounded-full bg-primary/70" />
+                          <div className="w-2 h-2 rounded-full bg-primary/70" />
+                          <div className="w-2 h-2 rounded-full bg-primary/70" />
                           <div className="w-2 h-2 rounded-full bg-primary/70" />
                           <div className="w-2 h-2 rounded-full bg-primary/70" />
                           <div className="w-2 h-2 rounded-full bg-primary/70" />

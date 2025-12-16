@@ -1,5 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getDynastyDetail, DynastyDetailVO, formatPeriod, generateRandomColor } from "@/services/dynasty";
 import { ChevronLeft, Crown, Users, Calendar, MapPin } from "lucide-react";
@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 
 const DynastyDetail = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [detail, setDetail] = useState<DynastyDetailVO | null>(null);
   const [loading, setLoading] = useState(true);
   const [color, setColor] = useState("");
@@ -126,11 +127,12 @@ const DynastyDetail = () => {
                 {persons.map((person) => (
                   <div
                     key={person.id}
-                    className="p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors"
+                    className="p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer"
+                    onClick={() => navigate(`/figures/${person.id}`)}
                   >
                     <div className="flex items-start justify-between">
                       <div>
-                        <h3 className="font-semibold text-foreground">
+                        <h3 className="font-semibold text-foreground hover:text-primary transition-colors">
                           {person.name}
                           {person.styleName && (
                             <span className="text-muted-foreground font-normal ml-2">
@@ -175,12 +177,13 @@ const DynastyDetail = () => {
                 {events.map((event) => (
                   <div
                     key={event.id}
-                    className="p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors"
+                    className="p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer"
+                    onClick={() => navigate(`/events/${event.id}`)}
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
-                          <h3 className="font-semibold text-foreground">
+                          <h3 className="font-semibold text-foreground hover:text-primary transition-colors">
                             {event.title}
                           </h3>
                           {event.category && (

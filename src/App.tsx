@@ -9,7 +9,9 @@ import Index from "./pages/Index";
 import Dynasties from "./pages/Dynasties";
 import DynastyDetail from "./pages/DynastyDetail";
 import Figures from "./pages/Figures";
+import FigureDetail from "./pages/FigureDetail";
 import Events from "./pages/Events";
+import EventDetail from "./pages/EventDetail";
 import AIAssistant from "./pages/AIAssistant";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -31,7 +33,9 @@ const App = () => (
             <Route path="/dynasties" element={<Dynasties />} />
             <Route path="/dynasties/:id" element={<DynastyDetail />} />
             <Route path="/figures" element={<Figures />} />
+            <Route path="/figures/:id" element={<FigureDetail />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/events/:id" element={<EventDetail />} />
             <Route path="/ai-assistant" element={<AIAssistant />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
