@@ -24,6 +24,19 @@ export interface PersonVO {
 }
 
 /**
+ * 人物关系数据类型
+ */
+export interface PersonRelationVO {
+  id: number;
+  personId: number;
+  personName: string;
+  relatedPersonId: number | null;
+  relatedPersonName: string;
+  relationType: string;
+  description: string | null;
+}
+
+/**
  * 获取随机人物列表（用于首页展示）
  * @param count 需要获取的人物数量，默认6个
  */
@@ -43,4 +56,11 @@ export async function getPersonById(id: number): Promise<ApiResponse<PersonVO>> 
  */
 export async function getAllPersons(): Promise<ApiResponse<PersonVO[]>> {
   return get<PersonVO[]>('/person/list');
+}
+
+/**
+ * 获取人物关系列表
+ */
+export async function getPersonRelations(personId: number): Promise<ApiResponse<PersonRelationVO[]>> {
+  return get<PersonRelationVO[]>(`/person/${personId}/relations`);
 }

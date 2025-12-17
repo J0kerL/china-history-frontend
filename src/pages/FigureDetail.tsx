@@ -1,14 +1,14 @@
 import { Layout } from "@/components/layout/Layout";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { getPersonById, PersonVO } from "@/services/person";
+import { getPersonById, getPersonRelations, PersonVO, PersonRelationVO } from "@/services/person";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   ArrowLeft, Crown, Sword, BookOpen, Palette, User, 
-  Calendar, MapPin, Award, ScrollText, Sparkles, Tag
+  Calendar, MapPin, Award, ScrollText, Sparkles, Tag, Users, ArrowRight
 } from "lucide-react";
 
 // 根据人物简介和成就推断类别
@@ -50,11 +50,36 @@ const formatYear = (year: number | null | undefined): string => {
   return year < 0 ? `公元前${Math.abs(year)}年` : `公元${year}年`;
 };
 
+// 关系类型对应的颜色
+const relationTypeColors: Record<string, string> = {
+  "父子": "bg-blue-500",
+  "母子": "bg-pink-500",
+  "夫妻": "bg-red-500",
+  "兄弟": "bg-green-500",
+  "兄妹": "bg-green-400",
+  "君臣": "bg-yellow-500",
+  "师生": "bg-purple-500",
+  "师承": "bg-purple-400",
+  "同僚": "bg-cyan-500",
+  "敌对": "bg-orange-500",
+  "同门": "bg-indigo-500",
+  "同派": "bg-indigo-400",
+  "同时期": "bg-gray-500",
+  "禅让": "bg-amber-500",
+  "祖孙": "bg-blue-400",
+  "叔侄": "bg-blue-300",
+  "后代": "bg-teal-500",
+  "前后相继": "bg-slate-500",
+  "辅佐": "bg-yellow-400",
+  "政敌": "bg-red-600",
+};
+
 const FigureDetail = () => {
   const { id } = useParams<{ id: string }>();
   const { isAuthenticated, isLoading: authLoading } = useAuth();
   const navigate = useNavigate();
   const [person, setPerson] = useState<PersonVO | null>(null);
+  const [relations, setRelations] = useState<PersonRelationVO[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -65,13 +90,21 @@ const FigureDetail = () => {
       return;
     }
 
-    const fetchPerson = async () => {
+    const fetchData = async () => {
       try {
-        const response = await getPersonById(Number(id));
-        if (response.code === 0 && response.data) {
-          setPerson(response.data);
+        const [personResponse, relationsResponse] = await Promise.all([
+          getPersonById(Number(id)),
+          getPersonRelations(Number(id))
+        ]);
+        
+        if (personResponse.code === 0 && personResponse.data) {
+          setPerson(personResponse.data);
         } else {
           setError("人物不存在");
+        }
+        
+        if (relationsResponse.code === 0 && relationsResponse.data) {
+          setRelations(relationsResponse.data);
         }
       } catch (err) {
         console.error("获取人物详情失败:", err);
@@ -80,7 +113,7 @@ const FigureDetail = () => {
         setLoading(false);
       }
     };
-    fetchPerson();
+    fetchData();
   }, [id, isAuthenticated, authLoading, navigate]);
 
   if (authLoading || loading) {
@@ -260,6 +293,51 @@ const FigureDetail = () => {
                     </p>
                   </div>
                 )}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* 人物关系 */}
+        {relations.length > 0 && (
+          <Card className="mt-8">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-primary" />
+                人物关系
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {relations.map((relation) => (
+                  <div 
+                    key={relation.id} 
+                    className="bg-muted/50 rounded-lg p-4 hover:bg-muted/70 transition-colors"
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <Badge 
+                        className={`${relationTypeColors[relation.relationType] || "bg-gray-500"} text-white`}
+                      >
+                        {relation.relationType}
+                      </Badge>
+                      {relation.relatedPersonId && (
+                        <Link to={`/figures/${relation.relatedPersonId}`}>
+                          <Button variant="ghost" size="sm" className="h-7 px-2">
+                            <ArrowRight className="h-4 w-4" />
+                          </Button>
+                        </Link>
+                      )}
+                    </div>
+                    <p className="text-foreground font-medium mb-1">
+                      {relation.relatedPersonName}
+                    </p>
+                    {relation.description && (
+                      <p className="text-xs text-muted-foreground line-clamp-2">
+                        {relation.description}
+                      </p>
+                    )}
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>

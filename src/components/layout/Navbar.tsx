@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Home, Users, Crown, Map, MessageCircle } from "lucide-react";
+import { Menu, X, Home, Users, Crown, Map, MessageCircle, MapPin, Landmark } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { UserMenu } from "./UserMenu";
@@ -8,13 +8,15 @@ import { useLoginRequired } from "@/hooks/useLoginRequired";
 import { LoginRequiredDialog } from "@/components/auth/LoginRequiredDialog";
 
 // 需要登录的路径
-const requireLoginPaths = ["/dynasties", "/figures", "/events", "/ai-assistant"];
+const requireLoginPaths = ["/dynasties", "/figures", "/events", "/ai-assistant", "/place-names", "/historical-sites"];
 
 const navItems = [
   { path: "/", label: "首页", icon: Home },
   { path: "/dynasties", label: "朝代", icon: Crown },
   { path: "/figures", label: "人物", icon: Users },
   { path: "/events", label: "事件", icon: Map },
+  { path: "/place-names", label: "古今地名", icon: MapPin },
+  { path: "/historical-sites", label: "历史遗迹", icon: Landmark },
   { path: "/ai-assistant", label: "AI助手", icon: MessageCircle },
 ];
 

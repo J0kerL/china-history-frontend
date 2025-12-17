@@ -12,6 +12,9 @@ import Figures from "./pages/Figures";
 import FigureDetail from "./pages/FigureDetail";
 import Events from "./pages/Events";
 import EventDetail from "./pages/EventDetail";
+import PlaceNames from "./pages/PlaceNames";
+import HistoricalSites from "./pages/HistoricalSites";
+import RelicDetail from "./pages/RelicDetail";
 import AIAssistant from "./pages/AIAssistant";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -36,6 +39,9 @@ const App = () => (
             <Route path="/figures/:id" element={<FigureDetail />} />
             <Route path="/events" element={<Events />} />
             <Route path="/events/:id" element={<EventDetail />} />
+            <Route path="/place-names" element={<PlaceNames />} />
+            <Route path="/historical-sites" element={<HistoricalSites />} />
+            <Route path="/historical-sites/:id" element={<RelicDetail />} />
             <Route path="/ai-assistant" element={<AIAssistant />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
